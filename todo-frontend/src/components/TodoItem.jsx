@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { serverUrl } from '../api';
 
 const TodoItem = ({ todoList, fetchTodos }) => {
   const [loadingId, setLoadingId] = useState(null); // track which item is being updated/deleted
@@ -13,7 +14,7 @@ const TodoItem = ({ todoList, fetchTodos }) => {
 
     try {
       setLoadingId(id);
-      await axios.delete(`http://localhost:3000/api/todos/${id}`);
+      await axios.delete(`${serverUrl}/api/todos/${id}`);
       toast.success("Item deleted");
       fetchTodos();
     } catch (err) {
@@ -31,7 +32,7 @@ const TodoItem = ({ todoList, fetchTodos }) => {
         title: todo.title,
         completed: !todo.completed,
       };
-      await axios.put(`http://localhost:3000/api/todos/${todo._id}`, updated);
+      await axios.put(`${serverUrl}/api/todos/${todo._id}`, updated);
       toast.success("Task updated");
       fetchTodos();
     } catch (err) {

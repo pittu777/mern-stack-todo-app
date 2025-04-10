@@ -64,6 +64,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { serverUrl } from '../api';
 
 const AddTodoForm = ({ fetchTodos }) => {
   const [inputValue, setInputValue] = useState("");
@@ -77,7 +78,7 @@ const AddTodoForm = ({ fetchTodos }) => {
 
     try {
       setLoading(true);
-      await axios.post("http://localhost:3000/api/create", {
+      await axios.post(`${serverUrl}/api/create`, {
         title: inputValue,
         completed: false,
       });
